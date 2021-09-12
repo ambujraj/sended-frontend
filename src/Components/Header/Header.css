@@ -1,6 +1,6 @@
 div.logo{
   color:rgb(47, 102, 169);
-  position:absolute;
+  position:fixed;
   top:10px;
   left:10px;
   font-size: 30px;
@@ -8,7 +8,7 @@ div.logo{
   font-weight: bolder;
 }
 div.header{
-    position:absolute;
+    position:fixed;
     top:10px;
     right:20px;
     border-radius: 50%;
