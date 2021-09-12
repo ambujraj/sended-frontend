@@ -1,0 +1,20 @@
+export const DATA =[
+ {
+    "filename":"compare.txt",
+    "filesize":"32KB",
+    "type":"TXT",
+    "percent":22
+ },
+ {
+    "filename":"less.pdf",
+    "filesize":"3MB",
+    "type":"PDF",
+    "percent":22
+ },
+ {
+   "filename":"Making.mov",
+    "filesize":"67GB",
+    "type":"OTHER",
+    "percent":22
+ }
+]

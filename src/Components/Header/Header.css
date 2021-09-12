@@ -1,0 +1,45 @@
+div.logo{
+  color:rgb(47, 102, 169);
+  position:absolute;
+  top:10px;
+  left:10px;
+  font-size: 30px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: bolder;
+}
+div.header{
+    position:absolute;
+    top:10px;
+    right:20px;
+    border-radius: 50%;
+    cursor: pointer;
+    background-color:rgb(227, 227, 227);
+    
+}
+div.onTop{
+    position: relative;
+}
+span.buyme{
+    right:15.5px;
+    position:absolute;
+    top: -35px;
+    z-index: 1;
+    color:rgb(24, 20, 20);
+    font-size: 10px;
+}
+ @media (prefers-reduced-motion: no-preference) {
+  .buyme{
+    animation: buyme infinite 1s ease-out;
+  }
+}
+
+
+@keyframes buyme {
+  from {
+      transform: scale(1);
+    
+  }
+  to {
+      transform: scale(0.9);
+  }
+} 
