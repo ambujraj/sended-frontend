@@ -1,19 +1,31 @@
-import React from 'react'
+import React,{useCallback, useState} from 'react'
 import './Uploader.css'
 import {AiOutlineCloudUpload} from 'react-icons/ai';
+import {useDropzone} from 'react-dropzone'
+
+
 
 function Uploader(props) {
+
+    const [files,setFiles] = useState([]);
+    const onDrop = useCallback((acceptedfiles,rejectedfiles) =>{
+        const mapaccepted = acceptedfiles.map((file) =>({file}));
+        setFiles((curr) =>[...curr, ...mapaccepted, ...rejectedfiles])
+    },[]);
+    
+    const {getRootProps,getInputProps} = useDropzone({onDrop});
     return (
         <div className="uploader">
             <div className="upload-info">
                 <div>
+                    {console.log(JSON.stringify(files))}
                     <h3>UPLOAD FILES</h3>
                 </div>
                 <div>
                     <p>Upload documents you want to share</p>
                 </div>
             </div>
-            <div className="uploader-box">
+            <div {...getRootProps()} className="uploader-box">
                 <div>
                     <AiOutlineCloudUpload  color="rgb(47, 102, 169)" fontSize="60px"/>
                 </div>
@@ -25,7 +37,7 @@ function Uploader(props) {
                 </div> 
                 <label for="file-upload" class="custom-file-upload">
                     Browser Files
-                    <input id="file-upload" type="file"/>
+                    <input  {...getInputProps()} />
                 </label>
             </div>
         </div>
