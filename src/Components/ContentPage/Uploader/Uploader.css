@@ -12,19 +12,39 @@ div.uploader{
 .uploader p{
     opacity:0.7;
 }
-
+.low-intensity{
+    opacity:0.1;
+    text-align: center;
+    justify-content: center;
+}
+.low{
+    position:relative;
+    left:-20px;
+}
+.low:hover{
+    opacity:0.7;
+    cursor: pointer;
+}
 .uploader-box{
     background-image: linear-gradient(rgb(229, 235, 242),rgb(213, 236, 237));
     padding:2% 60px;
-    min-width: 200px;
+    min-width: 336px;
     margin:20px;
     border:2px rgb(47, 102, 169) dashed;
     border-radius: 10px;
     color:rgb(47, 102, 169);
     opacity:0.8;
+    min-height:200px;
+    cursor: pointer;
+}
+.uploader-box:hover{
+    opacity: 0.7;
 }
 .upload-info{
     padding-bottom: 20px;
+}
+.copying{
+    margin-bottom: 0.5em;
 }
 .custom-file-upload {
     border: 1px solid #ccc;
@@ -35,6 +55,17 @@ div.uploader{
     font-weight: bolder; 
     color:white;
     box-shadow: 0 3px 8px rgb(89, 119, 196);
+}
+.custom-file-upload:hover{
+    opacity: 0.7;
+}
+input[type="text"]{
+    border:none;
+    outline: none;
+    background-image: linear-gradient(rgb(229, 235, 242),rgb(213, 236, 237));
+}
+input[type="text"]:hover{
+    background-image: linear-gradient(rgb(180, 209, 244),rgb(178, 232, 235));
 }
 input[type="file"] {
     display: none;

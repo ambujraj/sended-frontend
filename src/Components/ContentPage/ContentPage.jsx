@@ -1,12 +1,9 @@
 import {React,useState,useEffect} from 'react'
 import Uploader from './Uploader/Uploader'
-import AllUploads from './AllUploads/AllUploads'
-import {DATA} from './../../Data/Api/ServerData'
 import axios from 'axios';
 
 
-function ContentPage(props) {
-    const [data,setData] = useState({DATA});
+function ContentPage() {
     const [ip, setIP] = useState('');
 
     const getData = async() =>{
@@ -19,8 +16,8 @@ function ContentPage(props) {
     },[]);
     return (
         <div>
-            <Uploader data ={data}/>
-            <AllUploads data ={data}/>
+            <Uploader ip ={ip}/>
+            
         </div>
     )
 }
