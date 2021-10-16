@@ -6,14 +6,15 @@ import AllUploads from '../AllUploads/AllUploads';
 import axios from 'axios';
 import { FaRegCopy } from 'react-icons/fa';
 import CopyToClipboard from 'react-copy-to-clipboard';
+import side from '../../../rocketMan.svg'
 
 var ip;
 function UploadFiles(files,setOnload,setLink,setError){
     const zip = require('jszip')();
     for (let i = 0;i < files.length;i++) {
-        zip.file(files[i]);
+        zip.file(files[i].name,files[i]);
     }
-    const Url = 'https://6675-103-115-128-194.ngrok.io/api/upload/';
+    const Url = 'https://api.sended.in/api/upload';
     const fd = new FormData();
     fd.append('data',ip);
     zip.generateAsync({type: "blob"}).then(content => {
@@ -37,20 +38,20 @@ function Uploader(props) {
     const [files,setFiles] = useState([]);
     const [link,setLink] = useState("");
     const [error,setError] = useState("");
-    const onDrop = useCallback((acceptedfiles,rejectedfiles) =>{
-        const mapaccepted = acceptedfiles.map((file) =>({file}));
+    const onDrop = useCallback((acceptedFiles,rejectedFiles) =>{
+        const mapaccepted = acceptedFiles.map((file) =>({file}));
     
-        if(acceptedfiles.length){
+        if(acceptedFiles.length){
             setOnload(true);
-            UploadFiles(acceptedfiles,setOnload,setLink,setError);
+            UploadFiles(acceptedFiles,setOnload,setLink,setError);
         }
-        setFiles((curr) =>[...curr, ...mapaccepted, ...rejectedfiles])
+        setFiles((curr) =>[...curr, ...mapaccepted, ...rejectedFiles])
     },[]);
     
     const {getRootProps,getInputProps} = useDropzone({onDrop});
     return (
-        <div className="uploader">
-            <div className="upload-info">
+        <div className="d-flex flex-column p-5">
+            <div className="p-3">
                 <div>
                     <h3>UPLOAD FILES</h3>
                 </div>
@@ -58,31 +59,41 @@ function Uploader(props) {
                     <p>Upload documents you want to share</p>
                 </div>
             </div>
-            {onload ? <h1 className="uploader-box">Uploading...</h1>:
-            <div {...getRootProps()} className="uploader-box">
-                <div>
-                    <AiOutlineCloudUpload  color="rgb(47, 102, 169)" fontSize="60px"/>
+            <div className="pt-3 d-flex justify-content-around align-items-end">
+                    <div {...getRootProps()} className="box dashed">
+                        {onload ? <h1>Uploading...</h1>:
+                        <div className="">
+                            <div>
+                                <AiOutlineCloudUpload  color="rgb(47, 102, 169)" fontSize="60px"/>
+                            </div>
+                            <div>
+                                <h3> Click / Drop Your Files </h3>
+                            </div>  
+                            <div className="p-2">
+                                <h4>OR</h4>
+                            </div> 
+                            <label for="file-upload" className="button_upload">
+                                Browse Files
+                                <input  {...getInputProps()} />
+                            </label>
+                        </div>
+                        }
+                    </div>
+                <div className="box d-none d-md-block">
+                    <img width="400px" src ={side} alt ="Side Image" />
                 </div>
-                <div>
-                   <h3> Drag and Drop Your Files </h3>
-                </div>  
-                <div>
-                        <h4>OR</h4>
-                </div> 
-                <label for="file-upload" class="custom-file-upload">
-                    Browser Files
-                    <input  {...getInputProps()} />
-                </label>
             </div>
-
-            }
+            <div classsName="list_page">
             {
                 link.length 
                 ? 
-                <div className="copying">
+                <div className="box p-5">
+                    <label>
+                       <span className="text-primary"> Copy the Link</span>
                     <input type="text" value={link} />
+                    </label>
                     <CopyToClipboard text= {link} >
-                    <span className="low"><FaRegCopy/></span>
+                    <span className="copy"><FaRegCopy/></span>
                     </CopyToClipboard>
                 </div>
                 :
@@ -94,12 +105,14 @@ function Uploader(props) {
                 !onload && files.length?
                         <AllUploads file={files} />
                         : 
-                        <div>Select some files...</div>
+                        <div className="pt-5 text-danger">Select some files...</div>
                :
-               <div>Api Failed</div>
+               <div className="text-danger">Api Failed</div>
             }
-            
+            </div>
         </div>
+        
+        
     )
 }
 export default Uploader

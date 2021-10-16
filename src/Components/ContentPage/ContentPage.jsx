@@ -15,9 +15,8 @@ function ContentPage() {
 
     },[]);
     return (
-        <div>
+        <div className="container-fluid">
             <Uploader ip ={ip}/>
-            
         </div>
     )
 }
