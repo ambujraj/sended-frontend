@@ -2,7 +2,6 @@ import React,{useCallback, useState} from 'react'
 import './Uploader.css'
 import {AiOutlineCloudUpload} from 'react-icons/ai';
 import {useDropzone} from 'react-dropzone'
-import AllUploads from '../AllUploads/AllUploads';
 import axios from 'axios';
 import { FaRegCopy } from 'react-icons/fa';
 import CopyToClipboard from 'react-copy-to-clipboard';
@@ -37,13 +36,12 @@ function Uploader(props) {
     const [onload,setOnload] = useState(false);
     const [files,setFiles] = useState([]);
     const [link,setLink] = useState("");
-    const [error,setError] = useState("");
     const onDrop = useCallback((acceptedFiles,rejectedFiles) =>{
         const mapaccepted = acceptedFiles.map((file) =>({file}));
     
         if(acceptedFiles.length){
             setOnload(true);
-            UploadFiles(acceptedFiles,setOnload,setLink,setError);
+            UploadFiles(acceptedFiles,setOnload,setLink);
         }
         setFiles((curr) =>[...curr, ...mapaccepted, ...rejectedFiles])
     },[]);
@@ -59,7 +57,8 @@ function Uploader(props) {
                     <p>Upload documents you want to share</p>
                 </div>
             </div>
-            <div className="pt-3 d-flex justify-content-around align-items-end">
+            <div className="pt-3 d-flex justify-content-around align-items-end pb-1">
+                <div>                    
                     <div {...getRootProps()} className="box dashed">
                         {onload ? <h1>Uploading...</h1>:
                         <div className="">
@@ -79,37 +78,30 @@ function Uploader(props) {
                         </div>
                         }
                     </div>
+                    <div className="pt-2">
+                    {
+                        link.length 
+                        ? 
+                        <div className="d-flex flex-row">
+                            <span className="text-white ">Share </span>
+                            <label className="">
+                                <input type="text" value={link} />
+                            </label>
+                            <CopyToClipboard text={link}>
+                                <button className="copy"><FaRegCopy/></button>
+                            </CopyToClipboard>
+                        </div>
+                        :
+                        <div >
+                        </div>
+                    }
+                    </div>
+                </div>
                 <div className="box d-none d-md-block">
-                    <img width="400px" src ={side} alt ="Side Image" />
+                    <img width="400px" src ={side} alt ="Illustrator" />
                 </div>
             </div>
-            <div classsName="list_page">
-            {
-                link.length 
-                ? 
-                <div className="box p-5">
-                    <label>
-                       <span className="text-primary"> Copy the Link</span>
-                    <input type="text" value={link} />
-                    </label>
-                    <CopyToClipboard text= {link} >
-                    <span className="copy"><FaRegCopy/></span>
-                    </CopyToClipboard>
-                </div>
-                :
-                <div >
-                </div>
-            }
-            {
-                !error.length ?
-                !onload && files.length?
-                        <AllUploads file={files} />
-                        : 
-                        <div className="pt-5 text-danger">Select some files...</div>
-               :
-               <div className="text-danger">Api Failed</div>
-            }
-            </div>
+            
         </div>
         
         

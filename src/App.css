@@ -1,8 +1,8 @@
-
+*{
+  background-color: #34568B;
+  color:white;
+}
 .App {
   text-align: center;
 }
 
-body{
-  background-color: ivory;
-}
