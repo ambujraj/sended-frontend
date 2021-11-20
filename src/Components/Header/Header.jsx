@@ -1,13 +1,20 @@
 import React from 'react'
 import { AppBar, Typography } from '@mui/material'
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-import './Header.css'
+const theme = createTheme({
+  typography: {
+    fontFamily: 'Road Rage, cursive',
+  },
+})
 function Header() {
     return (
         <AppBar position="fixed">
-          <Typography align="center" variant="h6" color="inherit" backgroundColor="rgb(90, 127, 200)" noWrap >
-            Sended 
-          </Typography>
+          <ThemeProvider theme={theme} >
+            <Typography align="center" variant="h4" color="inherit" backgroundColor="rgb(90, 127, 200)" noWrap>
+              Sended
+            </Typography> 
+          </ThemeProvider>
         </AppBar>
     )
 }
