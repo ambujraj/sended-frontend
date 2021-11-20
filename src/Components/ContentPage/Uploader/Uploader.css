@@ -1,0 +1,38 @@
+
+
+.button_upload{
+    border-radius: 0.5em;
+    padding:0.5em;
+    background-color: rgb(47, 102, 169);
+    color:white;
+    cursor:pointer;
+}
+.box{
+    min-width: 300px;
+}
+.dashed{
+    outline-style:dashed;
+    outline-width: medium;
+    outline-color:rgb(195, 207, 222);
+    padding:1em;
+    cursor:pointer;
+    min-height:220px;
+}
+.dashed:hover{
+    opacity: 0.7;
+}
+input[type="text"]{
+    border:none;
+    outline: none;
+    background-image: linear-gradient(rgb(229, 235, 242),rgb(213, 236, 237));
+    color:black;
+}
+input[type="text"]:hover{
+    background-image: linear-gradient(rgb(180, 209, 244),rgb(178, 232, 235));
+}
+input[type="file"] {
+    display: none;
+}
+/* button{
+    border: rgb(66, 166, 228) ;
+} */
