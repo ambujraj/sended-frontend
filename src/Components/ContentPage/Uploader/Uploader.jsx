@@ -34,15 +34,12 @@ function UploadFiles(files,setOnload,setLink,setError){
 function Uploader(props) {
     ip = props.ip;
     const [onload,setOnload] = useState(false);
-    const [files,setFiles] = useState([]);
     const [link,setLink] = useState("");
     const onDrop = useCallback((acceptedFiles,rejectedFiles) =>{
-        const mapaccepted = acceptedFiles.map((file) =>({file}));
         if(acceptedFiles.length){
             setOnload(true);
             UploadFiles(acceptedFiles,setOnload,setLink);
         }
-        setFiles((curr) =>[...curr, ...mapaccepted, ...rejectedFiles])
     },[]);
     
     const {getRootProps,getInputProps} = useDropzone({onDrop});
@@ -77,7 +74,7 @@ function Uploader(props) {
                         </div>
                     }</div>
                     <div className="pt-2">
-                    {link.length &&
+                    {link.length ?
                     <div className="d-flex flex-row">
                         <span className="text-white ">Share </span>
                         <label className="">
@@ -86,7 +83,7 @@ function Uploader(props) {
                         <CopyToClipboard text={link}>
                             <button className="copy"><FaRegCopy/></button>
                         </CopyToClipboard>
-                    </div>}
+                    </div>:<div></div>}
                     </div>
                 </div>
                 <div className="box d-none d-md-block">
