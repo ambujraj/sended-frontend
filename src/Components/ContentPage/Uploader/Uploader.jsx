@@ -17,7 +17,7 @@ function UploadFiles(files,setOnload,setLink,setError){
     const fd = new FormData();
     fd.append('data',ip);
     zip.generateAsync({type: "blob"}).then(content => {
-        fd.append('file',content,'example.zip');
+        fd.append('file',content,'example');
         axios.post(Url,fd,{})
         .then((res)=>{
             console.log(res.data.link);
@@ -38,7 +38,6 @@ function Uploader(props) {
     const [link,setLink] = useState("");
     const onDrop = useCallback((acceptedFiles,rejectedFiles) =>{
         const mapaccepted = acceptedFiles.map((file) =>({file}));
-    
         if(acceptedFiles.length){
             setOnload(true);
             UploadFiles(acceptedFiles,setOnload,setLink);
@@ -61,7 +60,7 @@ function Uploader(props) {
                 <div>                    
                     <div {...getRootProps()} className="box dashed">
                         {onload ? <h1>Uploading...</h1>:
-                        <div className="">
+                        <div >
                             <div>
                                 <AiOutlineCloudUpload  color="rgb(47, 102, 169)" fontSize="60px"/>
                             </div>
@@ -76,35 +75,25 @@ function Uploader(props) {
                                 <input  {...getInputProps()} />
                             </label>
                         </div>
-                        }
-                    </div>
+                    }</div>
                     <div className="pt-2">
-                    {
-                        link.length 
-                        ? 
-                        <div className="d-flex flex-row">
-                            <span className="text-white ">Share </span>
-                            <label className="">
-                                <input type="text" value={link} />
-                            </label>
-                            <CopyToClipboard text={link}>
-                                <button className="copy"><FaRegCopy/></button>
-                            </CopyToClipboard>
-                        </div>
-                        :
-                        <div >
-                        </div>
-                    }
+                    {link.length &&
+                    <div className="d-flex flex-row">
+                        <span className="text-white ">Share </span>
+                        <label className="">
+                            <input type="text" value={link} />
+                        </label>
+                        <CopyToClipboard text={link}>
+                            <button className="copy"><FaRegCopy/></button>
+                        </CopyToClipboard>
+                    </div>}
                     </div>
                 </div>
                 <div className="box d-none d-md-block">
                     <img width="400px" src ={side} alt ="Illustrator" />
                 </div>
-            </div>
-            
-        </div>
-        
-        
+            </div>     
+        </div>      
     )
 }
 export default Uploader
