@@ -9,8 +9,6 @@ function Header() {
             Sended 
           </Typography>
         </AppBar>
-        
-       
     )
 }
 
