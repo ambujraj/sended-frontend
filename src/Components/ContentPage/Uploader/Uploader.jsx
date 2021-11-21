@@ -78,7 +78,9 @@ function Uploader(props) {
                     {link.length ?
                     <div className="d-flex flex-row m-2">
                         <label className="text-white">Share&nbsp;
-                            <input className="rounded p-1" type="text" disabled value={link} />
+                        <a href={link}>
+                            <input className="rounded p-1" type="text" disabled value={"https:frtug.com"} />
+                        </a>
                         </label>&nbsp;
                         <CopyToClipboard text={link}>
                             <button className="copy"><FaRegCopy/></button>
