@@ -17,7 +17,7 @@ function UploadFiles(files,setOnload,setLink){
     const Url = 'https://api.sended.in/api/upload';
     const fd = new FormData();
     fd.append('data',ip);
-    fd.append('file',files[0],'file');
+    fd.append('file',files[0]);
     // zip.generateAsync({type: "blob"}).then(content => {
     //     fd.append('file',content,'example');
         axios.post(Url,fd)
@@ -75,12 +75,12 @@ function Uploader(props) {
                         </div>
                     }</div>
                     <div className="pt-2">
-                    {true ?
+                    {link.length ?
                     <div className="d-flex flex-row m-2">
                         <label className="text-white">Share&nbsp;
-                            <input className="rounded p-1" type="text" disabled value={"https:frtug.com"} />
+                            <input className="rounded p-1" type="text" disabled value={link} />
                         </label>&nbsp;
-                        <CopyToClipboard text={"https:frtug.com"}>
+                        <CopyToClipboard text={link}>
                             <button className="copy"><FaRegCopy/></button>
                         </CopyToClipboard>
                     </div>:<div></div>}
