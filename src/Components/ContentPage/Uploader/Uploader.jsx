@@ -14,6 +14,7 @@ function UploadFiles(files,setOnload,setLink){
     // for (let i = 0;i < files.length;i++) {
     //     zip.file(files[i].name,files[i]);
     // }
+    setLink("");
     const Url = 'https://api.sended.in/api/upload';
     const fd = new FormData();
     fd.append('data',ip);
