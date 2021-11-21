@@ -78,7 +78,7 @@ function Uploader(props) {
                     {link.length ?
                     <div className="d-flex flex-row m-2">
                         <label className="text-white">Share&nbsp;
-                        <a href={link}>
+                        <a target="_blank" href={link}>
                             <input className="rounded p-1" type="text" disabled value={"https:frtug.com"} />
                         </a>
                         </label>&nbsp;
