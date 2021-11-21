@@ -8,17 +8,19 @@ import CopyToClipboard from 'react-copy-to-clipboard';
 import side from '../../../rocketMan.svg'
 
 var ip;
-function UploadFiles(files,setOnload,setLink,setError){
-    const zip = require('jszip')();
-    for (let i = 0;i < files.length;i++) {
-        zip.file(files[i].name,files[i]);
-    }
+function UploadFiles(files,setOnload,setLink){
+   console.log(files[0]);
+    // const zip = require('jszip')();
+    // for (let i = 0;i < files.length;i++) {
+    //     zip.file(files[i].name,files[i]);
+    // }
     const Url = 'https://api.sended.in/api/upload';
     const fd = new FormData();
     fd.append('data',ip);
-    zip.generateAsync({type: "blob"}).then(content => {
-        fd.append('file',content,'example');
-        axios.post(Url,fd,{})
+    fd.append('file',files[0],'file');
+    // zip.generateAsync({type: "blob"}).then(content => {
+    //     fd.append('file',content,'example');
+        axios.post(Url,fd)
         .then((res)=>{
             console.log(res.data.link);
             setOnload(false);
@@ -27,22 +29,18 @@ function UploadFiles(files,setOnload,setLink,setError){
         .catch(err =>{
             console.log(err);
             setOnload(false);
-            setError("Failed in the Api Call");
         })
-    });
+    
 }
 function Uploader(props) {
     ip = props.ip;
     const [onload,setOnload] = useState(false);
-    const [files,setFiles] = useState([]);
     const [link,setLink] = useState("");
     const onDrop = useCallback((acceptedFiles,rejectedFiles) =>{
-        const mapaccepted = acceptedFiles.map((file) =>({file}));
         if(acceptedFiles.length){
             setOnload(true);
             UploadFiles(acceptedFiles,setOnload,setLink);
         }
-        setFiles((curr) =>[...curr, ...mapaccepted, ...rejectedFiles])
     },[]);
     
     const {getRootProps,getInputProps} = useDropzone({onDrop});
@@ -50,10 +48,10 @@ function Uploader(props) {
         <div className="d-flex flex-column p-5">
             <div className="p-3">
                 <div>
-                    <h3>UPLOAD FILES</h3>
+                    <h3>UPLOAD FILE</h3>
                 </div>
                 <div>
-                    <p>Upload documents you want to share</p>
+                    <p>Upload zipped file you want to share</p>
                 </div>
             </div>
             <div className="pt-3 d-flex justify-content-around align-items-end pb-1">
@@ -72,21 +70,20 @@ function Uploader(props) {
                             </div> 
                             <label for="file-upload" className="button_upload">
                                 Browse Files
-                                <input  {...getInputProps()} />
+                                <input  {...getInputProps()} type="file"/>
                             </label>
                         </div>
                     }</div>
                     <div className="pt-2">
-                    {link.length &&
-                    <div className="d-flex flex-row">
-                        <span className="text-white ">Share </span>
-                        <label className="">
-                            <input type="text" value={link} />
-                        </label>
-                        <CopyToClipboard text={link}>
+                    {true ?
+                    <div className="d-flex flex-row m-2">
+                        <label className="text-white">Share&nbsp;
+                            <input className="rounded p-1" type="text" disabled value={"https:frtug.com"} />
+                        </label>&nbsp;
+                        <CopyToClipboard text={"https:frtug.com"}>
                             <button className="copy"><FaRegCopy/></button>
                         </CopyToClipboard>
-                    </div>}
+                    </div>:<div></div>}
                     </div>
                 </div>
                 <div className="box d-none d-md-block">
